@@ -8,10 +8,12 @@
     "dist/**/*"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "build": "rimraf ./dist && tsc",
     "lint": "eslint ./src --ext .ts,.js --max-warnings=0",
     "test": "jest",
     "preversion": "npm run build && npm run lint && npm test",
+    "prepublish": "npm run build",
     "postversion": "git push && git push --tags"
   },
   "repository": {
