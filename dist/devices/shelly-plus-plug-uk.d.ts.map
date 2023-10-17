@@ -1,0 +1,1 @@
+{"version":3,"file":"shelly-plus-plug-uk.d.ts","sourceRoot":"","sources":["../../src/devices/shelly-plus-plug-uk.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,eAAe,EAAE,MAAM,sBAAsB,CAAC;AACvD,OAAO,EAAE,OAAO,EAAE,MAAM,eAAe,CAAC;AAExC,qBAAa,gBAAiB,SAAQ,eAAe;IACnD,MAAM,CAAC,QAAQ,CAAC,KAAK,EAAE,MAAM,CAAkB;IAC/C,MAAM,CAAC,QAAQ,CAAC,SAAS,EAAE,MAAM,CAAyB;IAG1D,QAAQ,CAAC,OAAO,UAAkC;CACnD"}
