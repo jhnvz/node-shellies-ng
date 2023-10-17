@@ -1,6 +1,6 @@
 import { Device } from './base';
 import { BluetoothLowEnergy, Cloud, DevicePower, HtUi, Humidity, Mqtt, OutboundWebSocket, Temperature, WiFi } from '../components';
-export declare class ShellyPlusHt extends Device {
+export declare class ShellyPlusHT extends Device {
     static readonly model: string;
     static readonly modelName: string;
     readonly wifi: WiFi;

@@ -1,4 +1,5 @@
 import { DeviceId } from '../devices';
+import EventEmitter from 'eventemitter3';
 /**
  * Describes a discovered Shelly device.
  */
@@ -8,26 +9,29 @@ export interface DeviceIdentifiers {
      */
     deviceId: DeviceId;
     /**
-     * The recommended protocol to use when communicating with this device.
-     */
-    protocol: 'websocket' | 'outboundWebsocket';
-    /**
      * The IP address or hostname of the device, if available.
      */
     hostname?: string;
 }
+type DeviceDiscovererEvents = {
+    /**
+     * The 'discover' event is emitted when a device is discovered.
+     */
+    discover: (identifiers: DeviceIdentifiers) => void;
+    /**
+     * The 'error' event is emitted if an asynchronous error occurs.
+     */
+    error: (error: Error) => void;
+};
 /**
- * Interface that all device discoverers must implement.
- * The 'discover' event should be emitted for each new device discovered.
+ * Base class for device discoverers.
  */
-export interface DeviceDiscoverer {
+export declare abstract class DeviceDiscoverer extends EventEmitter<DeviceDiscovererEvents> {
     /**
-     * Adds an event listener for the 'discover' event.
+     * Handles a discovered device.
+     * Subclasses should call this method when a device has been discovered.
      */
-    on(event: 'discover', listener: (identifiers: DeviceIdentifiers) => void): this;
-    /**
-     * Removes an event listener for the 'discover' event.
-     */
-    removeListener(event: 'discover', listener: (identifiers: DeviceIdentifiers) => void): any;
+    protected handleDiscoveredDevice(identifiers: DeviceIdentifiers): void;
 }
+export {};
 //# sourceMappingURL=base.d.ts.map

@@ -6,10 +6,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShellyPlusHt = void 0;
+exports.ShellyPlusHT = void 0;
 const base_1 = require("./base");
 const components_1 = require("../components");
-class ShellyPlusHt extends base_1.Device {
+class ShellyPlusHT extends base_1.Device {
     constructor() {
         super(...arguments);
         this.wifi = new components_1.WiFi(this);
@@ -23,35 +23,35 @@ class ShellyPlusHt extends base_1.Device {
         this.htUi = new components_1.HtUi(this);
     }
 }
-ShellyPlusHt.model = 'SNSN-0013A';
-ShellyPlusHt.modelName = 'Shelly Plus H&T';
+ShellyPlusHT.model = 'SNSN-0013A';
+ShellyPlusHT.modelName = 'Shelly Plus H&T';
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "wifi", void 0);
+], ShellyPlusHT.prototype, "wifi", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "bluetoothLowEnergy", void 0);
+], ShellyPlusHT.prototype, "bluetoothLowEnergy", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "cloud", void 0);
+], ShellyPlusHT.prototype, "cloud", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "mqtt", void 0);
+], ShellyPlusHT.prototype, "mqtt", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "outboundWebSocket", void 0);
+], ShellyPlusHT.prototype, "outboundWebSocket", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "temperature0", void 0);
+], ShellyPlusHT.prototype, "temperature0", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "humidity0", void 0);
+], ShellyPlusHT.prototype, "humidity0", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "devicePower0", void 0);
+], ShellyPlusHT.prototype, "devicePower0", void 0);
 __decorate([
     base_1.component
-], ShellyPlusHt.prototype, "htUi", void 0);
-exports.ShellyPlusHt = ShellyPlusHt;
-base_1.Device.registerClass(ShellyPlusHt);
+], ShellyPlusHT.prototype, "htUi", void 0);
+exports.ShellyPlusHT = ShellyPlusHT;
+base_1.Device.registerClass(ShellyPlusHT);
 //# sourceMappingURL=shelly-plus-ht.js.map

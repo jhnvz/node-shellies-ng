@@ -1,6 +1,5 @@
-import EventEmitter from 'eventemitter3';
 import mDNS from 'multicast-dns';
-import { DeviceDiscoverer, DeviceIdentifiers } from './base';
+import { DeviceDiscoverer } from './base';
 /**
  * Defines options that are passed along to the multicast-dns library.
  */
@@ -11,20 +10,10 @@ export interface MdnsOptions {
      */
     interface?: string;
 }
-type MdnsDeviceDiscovererEvents = {
-    /**
-     * The 'discover' event is emitted when a device is discovered.
-     */
-    discover: (identifiers: DeviceIdentifiers) => void;
-    /**
-     * The 'error' event is emitted if an asynchronous error occurs.
-     */
-    error: (error: Error) => void;
-};
 /**
  * A service that can discover Shelly devices using mDNS.
  */
-export declare class MdnsDeviceDiscoverer extends EventEmitter<MdnsDeviceDiscovererEvents> implements DeviceDiscoverer {
+export declare class MdnsDeviceDiscoverer extends DeviceDiscoverer {
     /**
      * A reference to the multicast-dns library.
      */
@@ -72,5 +61,4 @@ export declare class MdnsDeviceDiscoverer extends EventEmitter<MdnsDeviceDiscove
      */
     protected handleResponse(response: mDNS.ResponsePacket): void;
 }
-export {};
 //# sourceMappingURL=mdns.d.ts.map

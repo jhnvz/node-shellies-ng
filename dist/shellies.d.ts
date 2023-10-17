@@ -1,7 +1,7 @@
 import EventEmitter from 'eventemitter3';
 import { Device, DeviceId } from './devices';
 import { DeviceDiscoverer, DeviceIdentifiers } from './discovery';
-import { OutboundWebSocketServer, RpcHandler, WebSocketRpcHandlerFactory, WebSocketRpcHandlerOptions } from './rpc';
+import { RpcHandler, WebSocketRpcHandlerFactory, WebSocketRpcHandlerOptions } from './rpc';
 /**
  * Defines configuration options for discovered devices.
  */
@@ -13,10 +13,10 @@ export interface DeviceOptions {
     /**
      * The protocol to use when communicating with the device.
      */
-    protocol?: 'websocket' | 'outboundWebsocket';
+    protocol: 'websocket';
     /**
      * The password to use if the Shelly device requires authentication.
-     * This is used with inbound WebSocket connections.
+     * This is used with WebSocket connections.
      */
     password?: string;
 }
@@ -33,10 +33,6 @@ export interface ShelliesOptions {
      * Configuration options for WebSockets.
      */
     websocket?: WebSocketRpcHandlerOptions;
-    /**
-     * An instance of a WebSocket server, that will be used when communication over so called Outbound WebSockets.
-     */
-    websocketServer?: OutboundWebSocketServer;
     /**
      * Whether the status should be loaded automatically for discovered devices.
      */
@@ -82,13 +78,9 @@ export declare class Shellies extends EventEmitter<ShelliesEvents> {
      */
     readonly websocket: WebSocketRpcHandlerFactory;
     /**
-     * The server used to handle Outbound WebSockets.
-     */
-    readonly websocketServer: OutboundWebSocketServer | null;
-    /**
      * Holds configuration options for this class.
      */
-    protected readonly options: ShelliesOptions;
+    protected options: ShelliesOptions;
     /**
      * Holds all devices, mapped to their IDs for quick and easy access.
      */

@@ -12,6 +12,7 @@ const rpc_1 = require("./rpc");
  */
 const DEFAULT_DEVICE_OPTIONS = {
     exclude: false,
+    protocol: 'websocket',
 };
 /**
  * Default `Shellies` options.
@@ -30,7 +31,6 @@ class Shellies extends eventemitter3_1.default {
      * @param opts - A set of configuration options.
      */
     constructor(opts) {
-        var _a;
         super();
         /**
          * Factory used to create new `WebSocketRpcHandler`s.
@@ -55,12 +55,6 @@ class Shellies extends eventemitter3_1.default {
         this.ignoredDevices = new Set();
         // store the options, with default values
         this.options = { ...DEFAULT_SHELLIES_OPTIONS, ...(opts || {}) };
-        // store the WebSocket server
-        this.websocketServer = (_a = this.options.websocketServer) !== null && _a !== void 0 ? _a : null;
-        // if we have a server, register it as a device discoverer
-        if (this.websocketServer !== null) {
-            this.registerDiscoverer(this.websocketServer);
-        }
     }
     /**
      * The number of devices.
@@ -199,22 +193,12 @@ class Shellies extends eventemitter3_1.default {
      * @param options - Configuration options for the device.
      */
     createRpcHandler(identifiers, options) {
-        var _a;
-        // determine what protocol to use
-        const protocol = (_a = options.protocol) !== null && _a !== void 0 ? _a : identifiers.protocol;
-        if (protocol === 'outboundWebsocket') {
-            // make sure we have a WebSocket server
-            if (this.websocketServer === null) {
-                throw new Error(`No WebSocket server has been configured (device ID: ${identifiers.deviceId})`);
-            }
-            return this.websocketServer.getRpcHandler(identifiers.deviceId);
-        }
-        else if (protocol === 'websocket' && identifiers.hostname) {
+        if (options.protocol === 'websocket' && identifiers.hostname) {
             const opts = { ...this.options.websocket, password: options.password };
             return this.websocket.create(identifiers.hostname, opts);
         }
         // we're missing something
-        throw new Error(`Missing required device identifier(s) (device ID: ${identifiers.deviceId}, protocol: ${protocol})`);
+        throw new Error(`Missing required device identifier(s) (device ID: ${identifiers.deviceId}, protocol: ${options.protocol})`);
     }
     /**
      * Handles 'discover' events from device discoverers.
@@ -228,10 +212,6 @@ class Shellies extends eventemitter3_1.default {
         }
         // get the configuration options for this device
         const opts = this.getDeviceOptions(deviceId);
-        if (opts.protocol && opts.protocol !== identifiers.protocol) {
-            // ignore if the available protocol doesn't match the requested protocol
-            return;
-        }
         if (opts.exclude) {
             // exclude this device
             this.ignoredDevices.add(deviceId);

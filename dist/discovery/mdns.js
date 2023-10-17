@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MdnsDeviceDiscoverer = void 0;
-const eventemitter3_1 = __importDefault(require("eventemitter3"));
 const multicast_dns_1 = __importDefault(require("multicast-dns"));
 const os_1 = __importDefault(require("os"));
+const base_1 = require("./base");
 /**
  * Default multicast-dns options.
  */
@@ -20,7 +20,7 @@ const SERVICE_NAME = '_shelly._tcp.local';
 /**
  * A service that can discover Shelly devices using mDNS.
  */
-class MdnsDeviceDiscoverer extends eventemitter3_1.default {
+class MdnsDeviceDiscoverer extends base_1.DeviceDiscoverer {
     /**
      * @param mdnsOptions - Options for the multicast-dns library.
      */
@@ -156,9 +156,8 @@ class MdnsDeviceDiscoverer extends eventemitter3_1.default {
             }
         }
         if (ipAddress) {
-            this.emit('discover', {
+            this.handleDiscoveredDevice({
                 deviceId,
-                protocol: 'websocket',
                 hostname: ipAddress,
             });
         }
